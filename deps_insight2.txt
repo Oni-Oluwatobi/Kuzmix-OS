@@ -1,0 +1,101 @@
+Calculating task graph as no cached configuration is available for tasks: app:dependencyInsight --configuration debugRuntimeClasspath --dependency ktor-client-core
+
+> Task :app:dependencyInsight
+io.ktor:ktor-client-core:3.0.3
+  Variant jvmRuntimeElements-published:
+    | Attribute Name                                  | Provided     | Requested    |
+    |-------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                      | jar          |              |
+    | org.gradle.status                               | release      |              |
+    | org.gradle.category                             | library      | library      |
+    | org.gradle.jvm.environment                      | standard-jvm | android      |
+    | org.gradle.usage                                | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type              | jvm          | androidJvm   |
+    | com.android.build.api.attributes.AgpVersionAttr |              | 9.1.1        |
+    | com.android.build.api.attributes.BuildTypeAttr  |              | debug        |
+   Selection reasons:
+      - By conflict resolution: between versions 3.0.3, 2.3.12 and 2.3.2
+
+io.ktor:ktor-client-core:3.0.3
++--- com.google.firebase:firebase-ai:17.13.0
+|    +--- debugRuntimeClasspath (requested com.google.firebase:firebase-ai)
+|    \--- com.google.firebase:firebase-bom:34.15.0
+|         \--- debugRuntimeClasspath
++--- io.ktor:ktor-client-content-negotiation-jvm:3.0.3
+|    \--- io.ktor:ktor-client-content-negotiation:3.0.3
+|         +--- com.google.firebase:firebase-ai:17.13.0 (*)
+|         \--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-content-negotiation:2.3.2)
+|              \--- com.google.ai.client.generativeai:generativeai:0.9.0
+|                   \--- debugRuntimeClasspath
++--- io.ktor:ktor-client-logging-jvm:3.0.3
+|    \--- io.ktor:ktor-client-logging:3.0.3
+|         +--- com.google.firebase:firebase-ai:17.13.0 (*)
+|         \--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-logging:2.3.2) (*)
++--- io.ktor:ktor-client-okhttp-jvm:3.0.3
+|    \--- io.ktor:ktor-client-okhttp:3.0.3
+|         +--- com.google.firebase:firebase-ai:17.13.0 (*)
+|         \--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-okhttp:2.3.2) (*)
+\--- io.ktor:ktor-client-websockets-jvm:3.0.3
+     \--- io.ktor:ktor-client-websockets:3.0.3
+          \--- com.google.firebase:firebase-ai:17.13.0 (*)
+
+io.ktor:ktor-client-core:2.3.2 -> 3.0.3
+\--- com.google.ai.client.generativeai:common:0.8.0
+     \--- com.google.ai.client.generativeai:generativeai:0.9.0
+          \--- debugRuntimeClasspath
+
+io.ktor:ktor-client-core:2.3.12 -> 3.0.3
++--- debugRuntimeClasspath
+\--- io.ktor:ktor-client-android-jvm:2.3.12
+     \--- io.ktor:ktor-client-android:2.3.12
+          \--- debugRuntimeClasspath
+
+io.ktor:ktor-client-core-jvm:3.0.3
+  Variant jvmRuntimeElements-published:
+    | Attribute Name                                  | Provided     | Requested    |
+    |-------------------------------------------------|--------------|--------------|
+    | org.gradle.libraryelements                      | jar          |              |
+    | org.gradle.status                               | release      |              |
+    | org.gradle.category                             | library      | library      |
+    | org.gradle.jvm.environment                      | standard-jvm | android      |
+    | org.gradle.usage                                | java-runtime | java-runtime |
+    | org.jetbrains.kotlin.platform.type              | jvm          | androidJvm   |
+    | com.android.build.api.attributes.AgpVersionAttr |              | 9.1.1        |
+    | com.android.build.api.attributes.BuildTypeAttr  |              | debug        |
+
+io.ktor:ktor-client-core-jvm:3.0.3
+\--- io.ktor:ktor-client-core:3.0.3
+     +--- debugRuntimeClasspath (requested io.ktor:ktor-client-core:2.3.12)
+     +--- com.google.firebase:firebase-ai:17.13.0
+     |    +--- debugRuntimeClasspath (requested com.google.firebase:firebase-ai)
+     |    \--- com.google.firebase:firebase-bom:34.15.0
+     |         \--- debugRuntimeClasspath
+     +--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-core:2.3.2)
+     |    \--- com.google.ai.client.generativeai:generativeai:0.9.0
+     |         \--- debugRuntimeClasspath
+     +--- io.ktor:ktor-client-android-jvm:2.3.12 (requested io.ktor:ktor-client-core:2.3.12)
+     |    \--- io.ktor:ktor-client-android:2.3.12
+     |         \--- debugRuntimeClasspath
+     +--- io.ktor:ktor-client-okhttp-jvm:3.0.3
+     |    \--- io.ktor:ktor-client-okhttp:3.0.3
+     |         +--- com.google.firebase:firebase-ai:17.13.0 (*)
+     |         \--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-okhttp:2.3.2) (*)
+     +--- io.ktor:ktor-client-websockets-jvm:3.0.3
+     |    \--- io.ktor:ktor-client-websockets:3.0.3
+     |         \--- com.google.firebase:firebase-ai:17.13.0 (*)
+     +--- io.ktor:ktor-client-content-negotiation-jvm:3.0.3
+     |    \--- io.ktor:ktor-client-content-negotiation:3.0.3
+     |         +--- com.google.firebase:firebase-ai:17.13.0 (*)
+     |         \--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-content-negotiation:2.3.2) (*)
+     \--- io.ktor:ktor-client-logging-jvm:3.0.3
+          \--- io.ktor:ktor-client-logging:3.0.3
+               +--- com.google.firebase:firebase-ai:17.13.0 (*)
+               \--- com.google.ai.client.generativeai:common:0.8.0 (requested io.ktor:ktor-client-logging:2.3.2) (*)
+
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 1s
+1 actionable task: 1 executed
+Configuration cache entry stored.

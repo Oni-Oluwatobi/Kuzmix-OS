@@ -1,0 +1,49 @@
+Calculating task graph as no cached configuration is available for tasks: app:dependencyInsight --configuration debugCompileClasspath --dependency ktor-client-core
+
+> Task :app:dependencyInsight
+io.ktor:ktor-client-core:2.3.12
+  Variant jvmApiElements-published:
+    | Attribute Name                                  | Provided | Requested  |
+    |-------------------------------------------------|----------|------------|
+    | org.gradle.libraryelements                      | jar      |            |
+    | org.gradle.status                               | release  |            |
+    | org.gradle.category                             | library  | library    |
+    | org.gradle.usage                                | java-api | java-api   |
+    | org.jetbrains.kotlin.platform.type              | jvm      | androidJvm |
+    | com.android.build.api.attributes.AgpVersionAttr |          | 9.1.1      |
+    | com.android.build.api.attributes.BuildTypeAttr  |          | debug      |
+    | org.gradle.jvm.environment                      |          | android    |
+
+io.ktor:ktor-client-core:2.3.12
++--- debugCompileClasspath
+\--- io.ktor:ktor-client-android-jvm:2.3.12
+     \--- io.ktor:ktor-client-android:2.3.12
+          \--- debugCompileClasspath
+
+io.ktor:ktor-client-core-jvm:2.3.12
+  Variant jvmApiElements-published:
+    | Attribute Name                                  | Provided | Requested  |
+    |-------------------------------------------------|----------|------------|
+    | org.gradle.libraryelements                      | jar      |            |
+    | org.gradle.status                               | release  |            |
+    | org.gradle.category                             | library  | library    |
+    | org.gradle.usage                                | java-api | java-api   |
+    | org.jetbrains.kotlin.platform.type              | jvm      | androidJvm |
+    | com.android.build.api.attributes.AgpVersionAttr |          | 9.1.1      |
+    | com.android.build.api.attributes.BuildTypeAttr  |          | debug      |
+    | org.gradle.jvm.environment                      |          | android    |
+
+io.ktor:ktor-client-core-jvm:2.3.12
+\--- io.ktor:ktor-client-core:2.3.12
+     +--- debugCompileClasspath
+     \--- io.ktor:ktor-client-android-jvm:2.3.12
+          \--- io.ktor:ktor-client-android:2.3.12
+               \--- debugCompileClasspath
+
+(*) - Indicates repeated occurrences of a transitive dependency subtree. Gradle expands transitive dependency subtrees only once per project; repeat occurrences only display the root of the subtree, followed by this annotation.
+
+A web-based, searchable dependency report is available by adding the --scan option.
+
+BUILD SUCCESSFUL in 2s
+1 actionable task: 1 executed
+Configuration cache entry stored.
