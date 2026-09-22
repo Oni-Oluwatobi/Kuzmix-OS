@@ -1,0 +1,6 @@
+{
+  "name": "Kuzmix OS",
+  "description": "Next-gen, Web3-style Android launcher with an adaptive aero-glass engine and hardware detection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

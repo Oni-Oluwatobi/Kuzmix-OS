@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="kuzmix_orange">#FFFF7A00</color>
+    <color name="kuzmix_yellow">#FFFFD600</color>
+    <color name="dark_background">#FF0F1015</color>
+    <color name="dark_surface">#FF1A1B23</color>
+    <color name="dark_card">#FF252630</color>
+</resources>
