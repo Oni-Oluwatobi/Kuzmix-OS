@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.kreadivegalaxy.kuzmixos.diagnostics.KuzmixCrashLoggingService
-
 class KuzmixOSApplication : Application(), Configuration.Provider {
     override fun onCreate() {
         super.onCreate()
@@ -36,11 +35,11 @@ class KuzmixOSApplication : Application(), Configuration.Provider {
         try {
             KuzmixServiceKeeper.schedule(this)
         } catch (e: Throwable) {
-            Log.w("KuzmixOS", "ServiceKeeper schedule failed: ${e.message}")
+Log.w("KuzmixOS", "ServiceKeeper schedule failed: ${e.message}")
         }
     }
 
-    override val workManagerConfiguration: Configuration
+override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
             .setMinimumLoggingLevel(android.util.Log.INFO)
             .build()

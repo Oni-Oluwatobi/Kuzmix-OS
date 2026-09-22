@@ -369,13 +369,13 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
 
     private suspend fun executeCall(call: okhttp3.Call): okhttp3.Response = withContext(Dispatchers.IO) {
         val deferred = CompletableDeferred<okhttp3.Response>()
-        call.enqueue(object : okhttp3.Callback {
+call.enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
                 deferred.completeExceptionally(e)
             }
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 deferred.complete(response)
-            }
+}
         })
         try {
             deferred.await()
@@ -383,7 +383,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
             if (!call.isCanceled()) {
                 call.cancel()
             }
-        }
+}
     }
 
     init {
@@ -473,7 +473,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
         }
     }
 
-    fun resolveContactAndSendSms(context: Context, contactName: String, message: String, onUpdate: (String) -> Unit) {
+fun resolveContactAndSendSms(context: Context, contactName: String, message: String, onUpdate: (String) -> Unit) {
         val hasReadContacts = ContextCompat.checkSelfPermission(context, android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_GRANTED
         if (!hasReadContacts) {
             val activity = getActivity()
@@ -598,7 +598,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
         }
     }
 
-    fun stopMedia() {
+fun stopMedia() {
         try {
             synchronized(mediaPlayerLock) {
                 val mp = mediaPlayer
@@ -643,7 +643,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
             "kuzmix", "kusmix", "kuz mix", "kozmix", "cosmix", "cosmic", "cosmo", "kc",
             "hey cuzmix", "hey cuz mix", "cuzmix", "cuz mix", "hey quiz mix", "quiz mix",
             "hey cruise mix", "hey kris mix", "hey kids mix", "hey cuss mix", "hey kuzzmix"
-        )
+)
         for (prefix in prefixes) {
             if (clean.lowercase().startsWith(prefix)) {
                 clean = clean.substring(prefix.length).trim()
@@ -1278,7 +1278,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
 
                 val call = openRouterClient.newCall(request)
                 val response = executeCall(call)
-                val responseBody = response.body?.string() ?: throw Exception("Empty response")
+val responseBody = response.body?.string() ?: throw Exception("Empty response")
 
                 if (!response.isSuccessful) {
                     throw Exception("API error ${response.code}: $responseBody")
@@ -1353,7 +1353,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
 
                 val call = openRouterClient.newCall(request)
                 val response = executeCall(call)
-                val responseBody = response.body ?: throw Exception("Empty response")
+val responseBody = response.body ?: throw Exception("Empty response")
 
                 if (!response.isSuccessful) {
                     throw Exception("API error ${response.code}")
@@ -1369,7 +1369,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
                     if (line.startsWith("data: ")) {
                         val data = line.removePrefix("data: ").trim()
                         if (data == "[DONE]") break
-                        try {
+try {
                             val chunk = JSONObject(data)
                             val choices = chunk.getJSONArray("choices")
                             if (choices.length() > 0) {
@@ -1434,7 +1434,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
             return
         }
 
-        if (lowerInput in listOf("stop", "be quiet", "shut up", "quiet", "cancel", "hush", "stop talking", "hold on", "never mind", "stop speaking")) {
+if (lowerInput in listOf("stop", "be quiet", "shut up", "quiet", "cancel", "hush", "stop talking", "hold on", "never mind", "stop speaking")) {
             stopSpeaking()
             onUpdate("Stopped. Listening...")
             return
@@ -1471,7 +1471,7 @@ class KuzmixIntentEngine(private val context: Context) : android.speech.tts.Text
             resumeMedia()
             speak("Playback resumed.")
             onUpdate("Playback resumed.")
-            return
+return
         }
 
         // 0. VIDEO FORGE INTERCEPTOR (GALAXY ANIMATOR)
@@ -2631,12 +2631,11 @@ fun KuzmixCustomizationHub(
     onClose: () -> Unit
 ) {
     var showStudioSheet by remember { mutableStateOf(false) }
-
-    Box(
+Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.Black.copy(alpha = 0.65f))
-            .clickable(interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }, indication = null) { onClose() },
+.clickable(interactionSource = remember { androidx.compose.foundation.interaction.MutableInteractionSource() }, indication = null) { onClose() },
         contentAlignment = Alignment.BottomCenter
     ) {
         Column(
@@ -2685,7 +2684,7 @@ fun KuzmixCustomizationHub(
                 },
                 onDismiss = { showStudioSheet = false }
             )
-        }
+}
     }
 }
 

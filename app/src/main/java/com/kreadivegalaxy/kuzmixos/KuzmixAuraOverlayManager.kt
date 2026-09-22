@@ -167,7 +167,7 @@ class KuzmixAuraOverlayManager(private val context: Context) {
                     val slideEnter: EnterTransition = if (hardwareTier == HardwareTier.TITAN) slideInVertically { it } else { EnterTransition.None }
                     val slideExit: ExitTransition = if (hardwareTier == HardwareTier.TITAN) slideOutVertically { it } else { ExitTransition.None }
 
-                    Box(
+Box(
                         modifier = Modifier.fillMaxSize()
                     ) {
                         // 1. Perimeter Edge Glow (Aura)
@@ -239,7 +239,7 @@ class KuzmixAuraOverlayManager(private val context: Context) {
                                         ) {
                                             Row(verticalAlignment = Alignment.CenterVertically) {
                                                 KuzmixBrandLogo(
-                                                    modifier = Modifier.size(20.dp)
+modifier = Modifier.size(20.dp)
                                                 )
                                                 Spacer(modifier = Modifier.width(8.dp))
                                                 Text(
@@ -503,7 +503,7 @@ fun Web3AssistantOverlayPanel(
 ) {
     val slideEnter: EnterTransition = if (hardwareTier == HardwareTier.TITAN) slideInVertically { it } else { EnterTransition.None }
     val slideExit: ExitTransition = if (hardwareTier == HardwareTier.TITAN) slideOutVertically { it } else { ExitTransition.None }
-    var showToolsMenu by remember { mutableStateOf(false) }
+var showToolsMenu by remember { mutableStateOf(false) }
 
     Box(
         modifier = Modifier
@@ -545,7 +545,7 @@ fun Web3AssistantOverlayPanel(
                         contentAlignment = Alignment.Center
                     ) {
                         KuzmixBrandLogo(
-                            modifier = Modifier.size(22.dp)
+modifier = Modifier.size(22.dp)
                         )
                     }
                     Column {
@@ -698,7 +698,7 @@ fun Web3AssistantOverlayPanel(
                         verticalArrangement = Arrangement.Center
                     ) {
                         KuzmixBrandLogo(
-                            modifier = Modifier.size(32.dp)
+modifier = Modifier.size(32.dp)
                         )
                         Spacer(modifier = Modifier.height(10.dp))
                         Text(
@@ -763,7 +763,7 @@ fun Web3AssistantOverlayPanel(
                                             modifier = Modifier.padding(bottom = 4.dp)
                                         ) {
                                             KuzmixBrandLogo(
-                                                modifier = Modifier.size(14.dp)
+modifier = Modifier.size(14.dp)
                                             )
                                             Text("Kuzmix AI", color = KuzmixOrange, fontSize = 11.sp, fontWeight = FontWeight.Bold)
                                         }

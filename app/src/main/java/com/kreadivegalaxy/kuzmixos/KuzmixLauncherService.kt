@@ -70,7 +70,7 @@ class KuzmixLauncherService : Service() {
                 pendingIntent
             )
         } catch (e: Throwable) {
-            android.util.Log.e("KuzmixOS", "Failed to schedule LauncherService restart: ${e.message}")
+android.util.Log.e("KuzmixOS", "Failed to schedule LauncherService restart: ${e.message}")
         }
     }
 
@@ -97,7 +97,7 @@ class KuzmixLauncherService : Service() {
             .setContentTitle("Kuzmix Sentinel Active")
             .setContentText("Monitoring Kuzmix OS background neural processes.")
             .setSmallIcon(R.drawable.ic_kuzmix_notification)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+.setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
     }
 

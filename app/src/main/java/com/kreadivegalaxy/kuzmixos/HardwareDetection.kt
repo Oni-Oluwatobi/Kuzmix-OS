@@ -52,7 +52,7 @@ object HardwareDetection {
                 HardwareTier.NOVA
             }
         } catch (e: Throwable) {
-            HardwareTier.NOVA
+HardwareTier.NOVA
         }
     }
 
@@ -62,7 +62,7 @@ object HardwareDetection {
         } catch (e: Throwable) {
             "Android Device"
         }
-    }
+}
 
     fun computeAeroGlassOpacity(lux: Float, pitch: Float, roll: Float): AeroGlassSensorState {
         val lightCat = when {

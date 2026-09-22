@@ -17,7 +17,7 @@ class KuzmixServiceKeeperWorker(
         if (!prefs.getBoolean("is_logged_in", false)) {
             return Result.success()
         }
-        ensureVoiceServiceRunning()
+ensureVoiceServiceRunning()
         ensureLauncherServiceRunning()
         return Result.success()
     }
@@ -37,7 +37,7 @@ class KuzmixServiceKeeperWorker(
                 applicationContext.startService(intent)
             }
         } catch (e: Throwable) {
-            android.util.Log.e("KuzmixOS", "ServiceKeeper: Failed to ensure VoiceService: ${e.message}")
+android.util.Log.e("KuzmixOS", "ServiceKeeper: Failed to ensure VoiceService: ${e.message}")
         }
     }
 
@@ -54,7 +54,7 @@ class KuzmixServiceKeeperWorker(
                 applicationContext.startService(intent)
             }
         } catch (e: Throwable) {
-            android.util.Log.e("KuzmixOS", "ServiceKeeper: Failed to ensure LauncherService: ${e.message}")
+android.util.Log.e("KuzmixOS", "ServiceKeeper: Failed to ensure LauncherService: ${e.message}")
         }
     }
 }

@@ -108,7 +108,7 @@ fun KuzmixGoldenEmblem(modifier: Modifier = Modifier) {
  */
 @Composable
 fun KuzmixAuthInputField(
-    value: String,
+value: String,
     onValueChange: (String) -> Unit,
     placeholder: String,
     leadingIcon: ImageVector,
@@ -122,15 +122,14 @@ fun KuzmixAuthInputField(
 
     val activeBorderColor = if (isFocused) Color(0xFFFFA000) else Color(0xFF232536)
     val iconTint = if (isFocused) Color(0xFFFFA000) else Color(0xFF6F7487)
-
-    OutlinedTextField(
+OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
         placeholder = {
             Text(
                 text = placeholder,
                 color = Color(0xFF6F7487),
-                fontSize = 14.sp
+fontSize = 14.sp
             )
         },
         leadingIcon = {
@@ -138,7 +137,7 @@ fun KuzmixAuthInputField(
                 imageVector = leadingIcon,
                 contentDescription = null,
                 tint = iconTint,
-                modifier = Modifier.size(20.dp)
+modifier = Modifier.size(20.dp)
             )
         },
         trailingIcon = if (isPassword) {
@@ -148,7 +147,7 @@ fun KuzmixAuthInputField(
                         imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
                         contentDescription = "Toggle Passcode Visibility",
                         tint = if (passwordVisible) Color(0xFFFFA000) else Color(0xFF6F7487),
-                        modifier = Modifier.size(20.dp)
+modifier = Modifier.size(20.dp)
                     )
                 }
             }
@@ -171,7 +170,7 @@ fun KuzmixAuthInputField(
             focusedTextColor = Color.White,
             unfocusedTextColor = Color.White,
             cursorColor = Color(0xFFFFA000)
-        ),
+),
         shape = RoundedCornerShape(16.dp),
         modifier = modifier
             .fillMaxWidth()
@@ -227,7 +226,7 @@ fun KuzmixLoginScreen(
             showDiagnosticsViewer = false
         }
         // Consume back gesture so tapping back on lock/login screen does not close the launcher
-    }
+}
 
     Box(
         modifier = Modifier
@@ -257,7 +256,7 @@ fun KuzmixLoginScreen(
                 )
             }
     ) {
-        Column(
+Column(
             modifier = Modifier
                 .fillMaxSize()
                 .verticalScroll(rememberScrollState())
@@ -269,97 +268,7 @@ fun KuzmixLoginScreen(
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            // ==========================================
-            // 1. BRAND HEADER (Exact User Design)
-            // ==========================================
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                // Circular Golden Emblem with Stylized White Kuzmix K
-                KuzmixGoldenEmblem(
-                    modifier = Modifier.size(92.dp)
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                // Brand Title
-                Text(
-                    text = "KUZMIX OS",
-                    color = Color.White,
-                    fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold,
-                    letterSpacing = 2.5.sp
-                )
-
-                Spacer(modifier = Modifier.height(6.dp))
-
-                // Subtitle
-                Text(
-                    text = "Neural Gateway",
-                    color = Color(0xFFFFA000),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight.SemiBold,
-                    letterSpacing = 0.5.sp
-                )
-            }
-
-            Spacer(modifier = Modifier.height(26.dp))
-
-            // Crash Recovery Alert Banner (shown when unexpected exit occurred)
-            AnimatedVisibility(visible = hasCrashOccurred) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(bottom = 16.dp)
-                        .clickable { showDiagnosticsViewer = true },
-                    shape = RoundedCornerShape(16.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF2C1417)),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFFFF453A).copy(alpha = 0.6f))
-                ) {
-                    Row(
-                        modifier = Modifier.padding(14.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Warning,
-                            contentDescription = null,
-                            tint = Color(0xFFFF453A),
-                            modifier = Modifier.size(22.dp)
-                        )
-                        Column(modifier = Modifier.weight(1f)) {
-                            Text(
-                                text = "System Recovered From Crash",
-                                color = Color.White,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-                            Text(
-                                text = "Diagnostic logs stored in Room DB. Tap to view.",
-                                color = Color(0xFFE5E5E7),
-                                fontSize = 11.sp
-                            )
-                        }
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                            contentDescription = null,
-                            tint = Color(0xFFFF453A),
-                            modifier = Modifier.size(18.dp)
-                        )
-                    }
-                }
-            }
-
-            // ==========================================
-            // 2. SIGN IN CARD (Exact User Design)
-            // ==========================================
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(28.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFF12131C)),
-                border = androidx.compose.foundation.BorderStroke(1.dp, Color(0xFF222434))
-            ) {
+            // ===================================) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -380,7 +289,7 @@ fun KuzmixLoginScreen(
                     KuzmixAuthInputField(
                         value = uiState.username,
                         onValueChange = { viewModel.onUsernameChanged(it) },
-                        placeholder = "Username or Email",
+placeholder = "Username or Email",
                         leadingIcon = Icons.Default.Person,
                         imeAction = ImeAction.Next
                     )
@@ -391,12 +300,12 @@ fun KuzmixLoginScreen(
                     KuzmixAuthInputField(
                         value = uiState.passcode,
                         onValueChange = { viewModel.onPasscodeChanged(it) },
-                        placeholder = "Passcode",
+placeholder = "Passcode",
                         leadingIcon = Icons.Default.Lock,
                         isPassword = true,
                         imeAction = ImeAction.Done,
                         onImeAction = { handleCredentialsSubmit() }
-                    )
+)
 
                     // Error Message Banner
                     AnimatedVisibility(
@@ -405,7 +314,7 @@ fun KuzmixLoginScreen(
                         exit = fadeOut()
                     ) {
                         uiState.errorMessage?.let { msg ->
-                            Row(
+Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(top = 10.dp)
@@ -441,7 +350,7 @@ fun KuzmixLoginScreen(
                             containerColor = Color.Transparent,
                             disabledContainerColor = Color.Transparent
                         ),
-                        contentPadding = PaddingValues(),
+contentPadding = PaddingValues(),
                         shape = RoundedCornerShape(16.dp),
                         modifier = Modifier
                             .fillMaxWidth()
@@ -451,7 +360,7 @@ fun KuzmixLoginScreen(
                                     colors = listOf(
                                         Color(0xFFFF7A00),
                                         Color(0xFF8000FF)
-                                    )
+)
                                 ),
                                 shape = RoundedCornerShape(16.dp)
                             )
@@ -461,7 +370,7 @@ fun KuzmixLoginScreen(
                             horizontalArrangement = Arrangement.Center
                         ) {
                             if (uiState.isAuthenticating) {
-                                CircularProgressIndicator(
+CircularProgressIndicator(
                                     color = Color.White,
                                     strokeWidth = 2.dp,
                                     modifier = Modifier.size(18.dp)
@@ -472,7 +381,7 @@ fun KuzmixLoginScreen(
                                     color = Color.White,
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 15.sp
-                                )
+)
                             } else {
                                 Text(
                                     text = "Enter OS",
@@ -481,7 +390,7 @@ fun KuzmixLoginScreen(
                                     fontSize = 15.sp
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
-                                Icon(
+Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowForward,
                                     contentDescription = null,
                                     tint = Color.White,
@@ -494,7 +403,7 @@ fun KuzmixLoginScreen(
                     Spacer(modifier = Modifier.height(14.dp))
 
                     // Secondary Action Row: "Guest" & "Biometric"
-                    Row(
+Row(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(10.dp)
                     ) {
@@ -570,65 +479,13 @@ fun KuzmixLoginScreen(
                                     fontWeight = FontWeight.SemiBold
                                 )
                             }
-                        }
+}
                     }
                 }
             }
 
             Spacer(modifier = Modifier.height(28.dp))
 
-            // ==========================================
-            // 3. MINIMAL FOOTER (Exact User Design)
-            // ==========================================
-            Text(
-                text = "The Kreadive Galaxy • Oni Oluwatobi",
-                color = Color(0xFF5A5E70),
-                fontSize = 12.sp,
-                fontWeight = FontWeight.Medium
-            )
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            // Diagnostic Logs Access Button
-            Row(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(20.dp))
-                    .clickable { showDiagnosticsViewer = true }
-                    .background(Color(0xFF1C1C1E).copy(alpha = 0.8f))
-                    .border(1.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(20.dp))
-                    .padding(horizontal = 14.dp, vertical = 7.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.spacedBy(6.dp)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.BugReport,
-                    contentDescription = "Diagnostic Logs",
-                    tint = Color(0xFF0A84FF),
-                    modifier = Modifier.size(14.dp)
-                )
-                Text(
-                    text = "System Diagnostic Logs",
-                    color = Color(0xFF8E8E93),
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Medium
-                )
-            }
-
-            Spacer(modifier = Modifier.height(12.dp))
-        }
-
-        // Fullscreen Diagnostic Logs Overlay
-        AnimatedVisibility(
-            visible = showDiagnosticsViewer,
-            enter = fadeIn(),
-            exit = fadeOut()
-        ) {
-            com.kreadivegalaxy.kuzmixos.diagnostics.DiagnosticLogsViewerScreen(
-                onClose = {
-                    showDiagnosticsViewer = false
-                    hasCrashOccurred = com.kreadivegalaxy.kuzmixos.diagnostics.KuzmixCrashLoggingService.hasUnhandledCrashOccurred(context)
-                }
-            )
-        }
+            // ===================================}
     }
 }

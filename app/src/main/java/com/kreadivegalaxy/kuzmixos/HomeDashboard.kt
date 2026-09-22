@@ -173,7 +173,7 @@ fun getDockApps(context: Context, allApps: List<AppItem>): List<AppItem> {
                     else -> android.R.drawable.ic_menu_compass
                 }
             )
-            val fallbackApp = AppItem(
+val fallbackApp = AppItem(
                 label = fallbackLabel,
                 packageName = "com.aistudio.fallback.${fallbackLabel.lowercase()}",
                 icon = fallbackDrawable,
@@ -210,8 +210,7 @@ fun HomeDashboard(
     val slideExit: ExitTransition = if (hardwareTier == HardwareTier.TITAN) slideOutVertically { it } else { ExitTransition.None }
     val slideEnterReverse: EnterTransition = if (hardwareTier == HardwareTier.TITAN) slideInVertically { -it } else { EnterTransition.None }
     val slideExitReverse: ExitTransition = if (hardwareTier == HardwareTier.TITAN) slideOutVertically { -it } else { ExitTransition.None }
-
-    var showAppLibrary by remember { mutableStateOf(false) }
+var showAppLibrary by remember { mutableStateOf(false) }
     var showControlCenter by remember { mutableStateOf(false) }
     var showWallpaperHub by remember { mutableStateOf(false) }
     var showSingularityOverlay by remember { mutableStateOf(false) }
@@ -221,8 +220,7 @@ fun HomeDashboard(
     var showSupportOverlay by remember { mutableStateOf(false) }
     var showStudioOverlay by remember { mutableStateOf(false) }
     var showDiagnosticsOverlay by remember { mutableStateOf(false) }
-
-    LaunchedEffect(showAppLibrary) {
+LaunchedEffect(showAppLibrary) {
         if (showAppLibrary) {
             try {
                 view.performHapticFeedback(android.view.HapticFeedbackConstants.VIRTUAL_KEY)
@@ -282,13 +280,13 @@ fun HomeDashboard(
         } catch (e: Throwable) {
             android.util.Log.w("KuzmixOS", "TTS engine init failed: ${e.message}")
         }
-    }
+}
 
     LaunchedEffect(Unit) {
         try {
             val prefs = context.getSharedPreferences("KuzmixSettings", Context.MODE_PRIVATE)
             prefs.edit().putBoolean("battery_opt_prompted", true).apply()
-        } catch (_: Exception) {}
+} catch (_: Exception) {}
     }
 
     DisposableEffect(tts) {
@@ -317,7 +315,7 @@ fun HomeDashboard(
             showSupportOverlay -> showSupportOverlay = false
             showStudioOverlay -> showStudioOverlay = false
             showDiagnosticsOverlay -> showDiagnosticsOverlay = false
-            showWakeWordOnboarding -> {
+showWakeWordOnboarding -> {
                 showWakeWordOnboarding = false
                 settingsPrefs.edit().putBoolean("has_seen_wake_word_onboarding", true).apply()
             }
@@ -421,7 +419,7 @@ fun HomeDashboard(
     var isListening by remember { mutableStateOf(false) }
     var singularityInput by remember { mutableStateOf("") }
 
-    var speakTextAloud: (String, String) -> Unit = { _, _ -> }
+var speakTextAloud: (String, String) -> Unit = { _, _ -> }
 
     val processVoiceOrTextInput = { input: String ->
         showSingularityOverlay = true
@@ -750,7 +748,7 @@ fun HomeDashboard(
         triggerSpeechRecognition()
     }
 
-    speakTextAloud = { text: String, query: String ->
+speakTextAloud = { text: String, query: String ->
         val lowerQuery = query.lowercase()
         val lowerText = text.lowercase()
         val isQuiet = lowerQuery.contains("quietly") || lowerQuery.contains("silently") || lowerQuery.contains("shh") || lowerQuery.contains("don't read") ||
@@ -764,7 +762,7 @@ fun HomeDashboard(
         }
     }
 
-    LaunchedEffect(Unit) {
+LaunchedEffect(Unit) {
         apps = appLoader.loadApps().sortedBy { it.label }
     }
 
@@ -841,7 +839,7 @@ fun HomeDashboard(
                 onSupportClick = { showSupportOverlay = true },
                 onStudioClick = { showStudioOverlay = true },
                 onDiagnosticsClick = { showDiagnosticsOverlay = true }
-            )
+)
         }
 
         // Dedicated status bar / gesture pull down area at the top of the screen.
@@ -879,7 +877,7 @@ fun HomeDashboard(
                 onSupportClick = { showSupportOverlay = true },
                 onStudioClick = { showStudioOverlay = true },
                 onDiagnosticsClick = { showDiagnosticsOverlay = true }
-            )
+)
         }
         
         AnimatedVisibility(
@@ -1009,7 +1007,7 @@ fun HomeDashboard(
         ) {
             com.kreadivegalaxy.kuzmixos.diagnostics.DiagnosticLogsViewerScreen(
                 onClose = { showDiagnosticsOverlay = false }
-            )
+)
         }
 
         AnimatedVisibility(
@@ -1138,43 +1136,43 @@ fun KuzmixHomeScreen(
                 label = "Kuzmix AI",
                 packageName = "com.kreadivegalaxy.kuzmixos.aichat",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_help),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_AI_CHAT")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_AI_CHAT")
             ),
             AppItem(
                 label = "Control Center",
                 packageName = "com.kreadivegalaxy.kuzmixos.controlcenter",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_manage),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_CONTROL_CENTER")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_CONTROL_CENTER")
             ),
             AppItem(
                 label = "Themes",
                 packageName = "com.kreadivegalaxy.kuzmixos.themes",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_gallery),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_THEMES")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_THEMES")
             ),
             AppItem(
                 label = "QR Scanner & Generator",
                 packageName = "com.kreadivegalaxy.kuzmixos.qrscanner",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_camera),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_QR_SCANNER")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_QR_SCANNER")
             ),
             AppItem(
                 label = "Voice Settings",
                 packageName = "com.kreadivegalaxy.kuzmixos.voicesettings",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_btn_speak_now),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_VOICE_SETTINGS")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_VOICE_SETTINGS")
             ),
             AppItem(
                 label = "Utilities",
                 packageName = "com.kreadivegalaxy.kuzmixos.utilities",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_preferences),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_UTILITIES")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_UTILITIES")
             ),
             AppItem(
                 label = "Support & About",
                 packageName = "com.kreadivegalaxy.kuzmixos.support",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_help),
-                intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_SUPPORT")
+intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_SUPPORT")
             ),
             AppItem(
                 label = "Kuzmix Studio",
@@ -1187,7 +1185,7 @@ fun KuzmixHomeScreen(
                 packageName = "com.kreadivegalaxy.kuzmixos.diagnostics",
                 icon = safeGetSystemDrawable(context, android.R.drawable.ic_menu_info_details),
                 intent = android.content.Intent("com.kreadivegalaxy.kuzmixos.ACTION_DIAGNOSTICS")
-            )
+)
         )
     }
 
@@ -1205,7 +1203,7 @@ fun KuzmixHomeScreen(
         val packageList = if (dockedPackageNamesString != null) {
             val listStr = dockedPackageNamesString.orEmpty()
             if (listStr.isEmpty()) emptyList() else listStr.split(",")
-        } else {
+} else {
             getDockApps(context, allAvailableApps).map { it.packageName }
         }
         
@@ -1234,7 +1232,7 @@ fun KuzmixHomeScreen(
             "com.kreadivegalaxy.kuzmixos.support" -> onSupportClick()
             "com.kreadivegalaxy.kuzmixos.studio" -> onStudioClick()
             "com.kreadivegalaxy.kuzmixos.diagnostics" -> onDiagnosticsClick()
-            else -> {
+else -> {
                 try { context.startActivity(app.intent) } catch (e: Exception) { e.printStackTrace() }
             }
         }
@@ -1321,7 +1319,7 @@ fun KuzmixHomeScreen(
                 .systemBarsPadding()
         ) {
             // Edit Mode Bar Header (Left button Edit, Right button Done)
-            AnimatedVisibility(
+AnimatedVisibility(
                 visible = isEditMode,
                 enter = androidx.compose.animation.fadeIn(),
                 exit = androidx.compose.animation.fadeOut()
@@ -1360,7 +1358,7 @@ fun KuzmixHomeScreen(
                             fontWeight = FontWeight.Bold,
                             fontSize = 13.sp
                         )
-                    }
+}
                 }
             }
 
@@ -1375,7 +1373,7 @@ fun KuzmixHomeScreen(
                     val pageApps = pages.getOrNull(page) ?: emptyList()
                     val fallbackDrawable = remember(context) {
                         safeGetSystemDrawable(context, android.R.drawable.sym_def_app_icon)
-                    }
+}
                     Column(
                         modifier = Modifier
                             .fillMaxSize()
@@ -1385,7 +1383,7 @@ fun KuzmixHomeScreen(
                         if (page == 0) {
                             Spacer(modifier = Modifier.height(8.dp))
                             // TOP WIDGET CONTAINER (Side-by-side dual 2x2 cards)
-                            Row(
+Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(horizontal = 4.dp),
@@ -1404,7 +1402,7 @@ fun KuzmixHomeScreen(
                                             .background(Color(0xFF1C1C1E))
                                             .border(0.5.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(22.dp)),
                                         contentAlignment = Alignment.Center
-                                    ) {
+) {
                                         SpatialGlassClock(currentTime)
                                     }
                                     Spacer(modifier = Modifier.height(4.dp))
@@ -1428,7 +1426,7 @@ fun KuzmixHomeScreen(
                                             .background(Color(0xFF1C1C1E))
                                             .border(0.5.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(22.dp)),
                                         contentAlignment = Alignment.Center
-                                    ) {
+) {
                                         CalendarWidget(currentTime)
                                     }
                                     Spacer(modifier = Modifier.height(4.dp))
@@ -1551,7 +1549,7 @@ fun KuzmixHomeScreen(
                         hardwareTier = hardwareTier,
                         apps = apps,
                         onSearchClick = onSearchClick
-                    )
+)
                 }
             }
 
@@ -1569,7 +1567,7 @@ fun KuzmixHomeScreen(
                     )
                     .clickable { onSearchClick() }
                     .padding(horizontal = 14.dp, vertical = 5.dp),
-                contentAlignment = Alignment.Center
+contentAlignment = Alignment.Center
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
@@ -1580,7 +1578,7 @@ fun KuzmixHomeScreen(
                         text = "Search",
                         color = Color(0xFFEBEBF5),
                         fontSize = 12.sp,
-                        fontWeight = FontWeight.Medium
+fontWeight = FontWeight.Medium
                     )
                 }
             }
@@ -1609,7 +1607,7 @@ fun KuzmixHomeScreen(
             if (dockApps.isNotEmpty()) {
                 FloatingLiquidDock(
                     dockApps = dockApps.take(4),
-                    hardwareTier = hardwareTier,
+hardwareTier = hardwareTier,
                     onClick = { app ->
                         launchApp(app)
                     },
@@ -1619,7 +1617,7 @@ fun KuzmixHomeScreen(
                     }
                 )
             }
-        }
+}
 
         // Long Press Focused Context Menu Modal Overlay
         AnimatedVisibility(
@@ -1649,7 +1647,7 @@ fun KuzmixHomeScreen(
                                 shape = RoundedCornerShape(18.dp)
                             )
                             .padding(16.dp)
-                            .clickable(enabled = false) {}
+.clickable(enabled = false) {}
                     ) {
                         GlassAppIcon(
                             app = targetApp,
@@ -1665,7 +1663,7 @@ fun KuzmixHomeScreen(
                             text = customAppLabels[targetApp.packageName] ?: targetApp.label,
                             color = Color.White,
                             fontSize = 15.sp,
-                            fontWeight = FontWeight.Bold,
+fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center
                         )
 
@@ -1674,7 +1672,7 @@ fun KuzmixHomeScreen(
                                 .fillMaxWidth()
                                 .height(0.5.dp)
                                 .background(Color.White.copy(alpha = 0.16f))
-                        )
+)
 
                         Column(
                             modifier = Modifier.fillMaxWidth(),
@@ -1684,7 +1682,7 @@ fun KuzmixHomeScreen(
                             ContextMenuItem(
                                 icon = Icons.Default.Info,
                                 label = "App info",
-                                color = Color.White,
+color = Color.White,
                                 onClick = {
                                     try {
                                         val intent = Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
@@ -1719,7 +1717,7 @@ fun KuzmixHomeScreen(
                                     val currentHidden = prefs.getStringSet("hidden_packages", emptySet<String>()) ?: emptySet<String>()
                                     val updatedHidden = currentHidden + targetApp.packageName
                                     prefs.edit().putStringSet("hidden_packages", updatedHidden).apply()
-                                    val newSet = removedPackageNames + targetApp.packageName
+val newSet = removedPackageNames + targetApp.packageName
                                     removedPackageNames = newSet
                                     prefs.edit().putStringSet("removed_packages", newSet).apply()
                                     focusedApp = null
@@ -1746,7 +1744,7 @@ fun KuzmixHomeScreen(
                                     val newSet = removedPackageNames + targetApp.packageName
                                     removedPackageNames = newSet
                                     prefs.edit().putStringSet("removed_packages", newSet).apply()
-                                    focusedApp = null
+focusedApp = null
                                 }
                             )
                         }
@@ -2050,7 +2048,7 @@ fun AlphabeticalAppLibraryOverlay(
                                                 onClose()
                                                 onDiagnosticsClick()
                                             }
-                                            else -> {
+else -> {
                                                 try { context.startActivity(app.intent) } catch (e: Exception) { e.printStackTrace() }
                                             }
                                         }
@@ -2676,7 +2674,7 @@ fun SpatialGlassClock(currentTime: Date) {
                     val x = center.x + numRadius * kotlin.math.sin(angle).toFloat()
                     val y = center.y - numRadius * kotlin.math.cos(angle).toFloat() + 3.8.dp.toPx()
                     drawContext.canvas.nativeCanvas.drawText(keyNumbers[i] ?: "$i", x, y, textPaint)
-                }
+}
 
                 // Tiny tick marks
                 for (minute in 0..59) {
@@ -2707,7 +2705,7 @@ fun SpatialGlassClock(currentTime: Date) {
                 val secAngle = Math.PI * seconds / 30.0
 
                 // Hour hand (thick, dark)
-                drawLine(
+drawLine(
                     color = Color(0xFF1C1C1E),
                     start = center,
                     end = Offset(
@@ -2719,7 +2717,7 @@ fun SpatialGlassClock(currentTime: Date) {
                 )
 
                 // Minute hand (thinner, dark, longer)
-                drawLine(
+drawLine(
                     color = Color(0xFF1C1C1E),
                     start = center,
                     end = Offset(
@@ -2733,7 +2731,7 @@ fun SpatialGlassClock(currentTime: Date) {
                 // Second hand (thin, red, long)
                 drawLine(
                     color = Color(0xFFFF3B30),
-                    start = center,
+start = center,
                     end = Offset(
                         center.x + (radius * 0.82f) * kotlin.math.sin(secAngle).toFloat(),
                         center.y - (radius * 0.82f) * kotlin.math.cos(secAngle).toFloat()
@@ -2744,7 +2742,7 @@ fun SpatialGlassClock(currentTime: Date) {
 
                 // Center pin
                 drawCircle(Color(0xFFFF3B30), radius = 3.5.dp.toPx(), center = center)
-                drawCircle(Color(0xFF1C1C1E), radius = 1.0.dp.toPx(), center = center)
+drawCircle(Color(0xFF1C1C1E), radius = 1.0.dp.toPx(), center = center)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
@@ -2761,7 +2759,7 @@ fun CalendarWidget(currentTime: Date) {
         val monthStr = java.text.SimpleDateFormat("MMMM", java.util.Locale.getDefault()).format(currentTime).uppercase()
         val yearStr = java.text.SimpleDateFormat("yyyy", java.util.Locale.getDefault()).format(currentTime)
         "$monthStr $yearStr"
-    }
+}
     val todayDay = calendar.get(Calendar.DAY_OF_MONTH)
 
     val firstDayOffset = remember(currentTime) {
@@ -2810,7 +2808,7 @@ fun CalendarWidget(currentTime: Date) {
                 fontSize = 11.sp,
                 fontWeight = FontWeight.Bold,
                 letterSpacing = 0.8.sp,
-                modifier = Modifier.padding(start = 2.dp)
+modifier = Modifier.padding(start = 2.dp)
             )
         }
 
@@ -3057,7 +3055,7 @@ fun FloatingLiquidDock(
             .border(
                 width = 0.5.dp,
                 color = Color.White.copy(alpha = 0.28f),
-                shape = RoundedCornerShape(32.dp)
+shape = RoundedCornerShape(32.dp)
             ),
         contentAlignment = Alignment.Center
     ) {
@@ -3072,12 +3070,12 @@ fun FloatingLiquidDock(
                 Box(
                     modifier = Modifier.padding(horizontal = 4.dp),
                     contentAlignment = Alignment.Center
-                ) {
+) {
                     GlassAppIcon(
                         app = app,
                         isDock = true,
                         animationDelay = index * 40,
-                        onClick = { onClick(app) },
+onClick = { onClick(app) },
                         onLongClick = { onLongClick?.invoke(app) }
                     )
                 }
@@ -3312,7 +3310,7 @@ fun DrawCustomIcon(packageName: String, scaleFactor: Float, maskShape: Shape) {
                     contentAlignment = Alignment.Center
                 ) {
                     KuzmixBrandLogo(
-                        modifier = Modifier.fillMaxSize()
+modifier = Modifier.fillMaxSize()
                     )
                 }
             }
@@ -3626,7 +3624,7 @@ fun GlassAppIcon(
     val rotationAngle by infiniteTransition.animateFloat(
         initialValue = if (seed % 2 == 0) -1.8f else 1.8f,
         targetValue = if (seed % 2 == 0) 1.8f else -1.8f,
-        animationSpec = infiniteRepeatable(
+animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 110 + (seed % 35), easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
         ),
@@ -3636,7 +3634,7 @@ fun GlassAppIcon(
     val translationYAnim by infiniteTransition.animateFloat(
         initialValue = -0.5f,
         targetValue = 0.5f,
-        animationSpec = infiniteRepeatable(
+animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 130 + (seed % 25), easing = LinearEasing),
             repeatMode = RepeatMode.Reverse
         ),
@@ -3681,7 +3679,7 @@ fun GlassAppIcon(
 
     Box(
         contentAlignment = Alignment.TopStart,
-        modifier = Modifier.padding(top = if (isEditMode && !isDock) 4.dp else 0.dp)
+modifier = Modifier.padding(top = if (isEditMode && !isDock) 4.dp else 0.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -3806,7 +3804,7 @@ fun GlassAppIcon(
             Box(
                 modifier = Modifier
                     .offset(x = (-4).dp, y = (-6).dp)
-                    .size(20.dp)
+.size(20.dp)
                     .clip(CircleShape)
                     .background(Color(0xFFFF3B30))
                     .border(1.dp, Color.White, CircleShape)
@@ -3841,7 +3839,7 @@ fun CategoryFolderCard(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onClick() }
+.clickable { onClick() }
     ) {
         Box(
             modifier = Modifier
@@ -3850,7 +3848,7 @@ fun CategoryFolderCard(
                 .clip(RoundedCornerShape(22.dp))
                 .background(Color(0xFF1C1C1E))
                 .border(0.5.dp, Color.White.copy(alpha = 0.12f), RoundedCornerShape(22.dp))
-                .padding(12.dp),
+.padding(12.dp),
             contentAlignment = Alignment.Center
         ) {
             val miniApps = apps.take(4)
@@ -3862,7 +3860,7 @@ fun CategoryFolderCard(
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
+verticalAlignment = Alignment.CenterVertically
                 ) {
                     repeat(2) { index ->
                         val app = miniApps.getOrNull(index)
@@ -3873,7 +3871,7 @@ fun CategoryFolderCard(
                                 contentDescription = app.label,
                                 modifier = Modifier
                                     .size(44.dp)
-                                    .clip(maskShape)
+.clip(maskShape)
                             )
                         } else {
                             Box(
@@ -3881,14 +3879,14 @@ fun CategoryFolderCard(
                                     .size(44.dp)
                                     .clip(maskShape)
                                     .background(Color.White.copy(alpha = 0.06f))
-                            )
+)
                         }
                     }
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically
+verticalAlignment = Alignment.CenterVertically
                 ) {
                     repeat(2) { index ->
                         val app = miniApps.getOrNull(index + 2)
@@ -3899,7 +3897,7 @@ fun CategoryFolderCard(
                                 contentDescription = app.label,
                                 modifier = Modifier
                                     .size(44.dp)
-                                    .clip(maskShape)
+.clip(maskShape)
                             )
                         } else {
                             Box(
@@ -3907,7 +3905,7 @@ fun CategoryFolderCard(
                                     .size(44.dp)
                                     .clip(maskShape)
                                     .background(Color.White.copy(alpha = 0.06f))
-                            )
+)
                         }
                     }
                 }
@@ -3919,7 +3917,7 @@ fun CategoryFolderCard(
             color = Color.White,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold,
-            maxLines = 1,
+maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
     }
@@ -3946,8 +3944,7 @@ fun CategorizedAppLibraryPage(
             val lbl = app.label.lowercase()
             socialKeywords.any { pkg.contains(it) || lbl.contains(it) }
         }
-
-        val prod = cleanApps.filter { app ->
+val prod = cleanApps.filter { app ->
             val pkg = app.packageName.lowercase()
             val lbl = app.label.lowercase()
             productivityKeywords.any { pkg.contains(it) || lbl.contains(it) } && app !in social
@@ -3983,7 +3980,7 @@ fun CategorizedAppLibraryPage(
             list.add("All Apps" to cleanApps)
         }
         list
-    }
+}
 
     var activeFolderCategory by remember { mutableStateOf<Pair<String, List<AppItem>>?>(null) }
 
@@ -3991,7 +3988,7 @@ fun CategorizedAppLibraryPage(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 8.dp),
-        contentAlignment = Alignment.TopCenter
+contentAlignment = Alignment.TopCenter
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -4049,7 +4046,7 @@ fun CategorizedAppLibraryPage(
                             activeFolderCategory = cat
                         }
                     )
-                }
+}
             }
         }
 
@@ -4058,7 +4055,7 @@ fun CategorizedAppLibraryPage(
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.65f))
-                    .clickable { activeFolderCategory = null },
+.clickable { activeFolderCategory = null },
                 contentAlignment = Alignment.Center
             ) {
                 Column(
@@ -4070,7 +4067,7 @@ fun CategorizedAppLibraryPage(
                         .border(0.5.dp, Color.White.copy(alpha = 0.16f), RoundedCornerShape(24.dp))
                         .clickable(enabled = false) {}
                         .padding(20.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -4112,19 +4109,19 @@ fun CategorizedAppLibraryPage(
                             columns = androidx.compose.foundation.lazy.grid.GridCells.Fixed(4),
                             horizontalArrangement = Arrangement.SpaceEvenly,
                             verticalArrangement = Arrangement.spacedBy(16.dp),
-                            modifier = Modifier.fillMaxSize()
+modifier = Modifier.fillMaxSize()
                         ) {
                             val list = folder.second
                             items(list.size) { index ->
                                 val app = list[index]
                                 Box(
                                     modifier = Modifier.padding(4.dp),
-                                    contentAlignment = Alignment.Center
+contentAlignment = Alignment.Center
                                 ) {
                                     GlassAppIcon(
                                         app = app,
                                         animationDelay = index * 30,
-                                        onClick = {
+onClick = {
                                             try {
                                                 context.startActivity(app.intent)
                                                 activeFolderCategory = null

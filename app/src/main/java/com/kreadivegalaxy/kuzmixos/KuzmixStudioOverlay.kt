@@ -1237,8 +1237,7 @@ suspend fun generateImageWithOpenRouter(
     if (effectiveKey.isNullOrEmpty()) return@withContext null
     
     android.util.Log.d("KuzmixStudio", "Using API key: ${effectiveKey.substring(0, minOf(10, effectiveKey.length))}...")
-    
-    try {
+try {
         val client = OkHttpClient.Builder()
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
@@ -1304,8 +1303,7 @@ suspend fun generateVideoWithOpenRouter(
     if (effectiveKey.isNullOrEmpty()) return@withContext null
     
     android.util.Log.d("KuzmixStudio", "Using API key for video: ${effectiveKey.substring(0, minOf(10, effectiveKey.length))}...")
-    
-    try {
+try {
         val client = OkHttpClient.Builder()
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)

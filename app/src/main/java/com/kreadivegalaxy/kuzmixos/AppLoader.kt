@@ -55,5 +55,5 @@ class AppLoader(private val context: Context) {
             android.util.Log.e("KuzmixOS", "Failed to load apps: ${e.message}")
             emptyList()
         }
-    }
+}
 }

@@ -34,8 +34,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
     private var isMediaSessionActive = false
     private var isAudioDucked = false
     private var audioFocusRequest: android.media.AudioFocusRequest? = null
-
-    private lateinit var overlayManager: KuzmixAuraOverlayManager
+private lateinit var overlayManager: KuzmixAuraOverlayManager
     private lateinit var intentEngine: KuzmixIntentEngine
 
     override fun onCreate() {
@@ -51,7 +50,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
             isManualTrigger = true
             isListeningPaused = false
             duckAudio()
-            overlayManager.activateAuraStandard()
+overlayManager.activateAuraStandard()
             cancelAndRestartListening(100)
         }
         overlayManager.onStopRequested = {
@@ -62,7 +61,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
         intentEngine.onTtsStart = {
             isSpeakingTts = true
             duckAudio()
-            handler.post {
+handler.post {
                 try { speechRecognizer?.cancel() } catch (unused: Exception) {}
                 isListening = false
             }
@@ -70,7 +69,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
         intentEngine.onTtsDone = {
             isSpeakingTts = false
             unduckAudio()
-            scheduleRestartListening(400)
+scheduleRestartListening(400)
         }
 
         serviceScope.launch(Dispatchers.Main) {
@@ -87,7 +86,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                 checkMediaSession()
                 if (!isListeningPaused && !isSpeakingTts && !isListening) {
                     startListeningLoop()
-                }
+}
             }
         }
     }
@@ -125,7 +124,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
         }
     }
 
-    private fun isStopCommand(text: String): Boolean {
+private fun isStopCommand(text: String): Boolean {
         if (text.isBlank()) return false
         val lower = text.lowercase().trim()
         val stopPhrases = listOf(
@@ -139,7 +138,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
 
     private fun handleStopCommand() {
         unduckAudio()
-        activeQueryJob?.cancel()
+activeQueryJob?.cancel()
         activeQueryJob = null
         intentEngine.stopSpeaking()
 
@@ -288,7 +287,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
             isListening = false
             ensureSpeechRecognizer()
             scheduleRestartListening(500)
-        }
+}
     }
 
     private fun startListeningLoop() {
@@ -298,7 +297,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
             }
             if (!ensureSpeechRecognizer()) {
                 scheduleRestartListening(3000)
-                return@post
+return@post
             }
             if (!isListening && recognizerIntent != null) {
                 try {
@@ -320,7 +319,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                 speechRecognizer?.cancel()
             } catch (e: Exception) {
                 // Ignore cancel exceptions
-            }
+}
             isListening = false
             scheduleRestartListening(delayMs)
         }
@@ -370,7 +369,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                     overlayManager.activateAuraStandard()
                 }
                 startListeningLoop()
-            } else if (it.getBooleanExtra("EXTRA_START_LISTENING", false)) {
+} else if (it.getBooleanExtra("EXTRA_START_LISTENING", false)) {
                 isListeningPaused = false
                 startListeningLoop()
             }
@@ -384,8 +383,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
 
         val prefs = getSharedPreferences("KuzmixSettings", Context.MODE_PRIVATE)
         val customWakeWord = prefs.getString("custom_wake_word", "hey kuzmix")?.lowercase()?.trim() ?: "hey kuzmix"
-
-        // Check custom phrase if user specified one
+// Check custom phrase if user specified one
         if (customWakeWord.isNotBlank() && lower.contains(customWakeWord)) {
             return true
         }
@@ -420,7 +418,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
         )
         return mediaPhrases.any { phrase ->
             lower == phrase || lower.startsWith("$phrase ") || lower.contains(" $phrase ") || lower.endsWith(" $phrase")
-        }
+}
     }
 
     private fun isDirectCommand(text: String): Boolean {
@@ -604,7 +602,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
 
     override fun onBeginningOfSpeech() {
         duckAudio()
-        if (isManualTrigger || (::overlayManager.isInitialized && overlayManager.isAuraActive)) {
+if (isManualTrigger || (::overlayManager.isInitialized && overlayManager.isAuraActive)) {
             overlayManager.activateAura(0)
         }
     }
@@ -612,8 +610,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
     override fun onRmsChanged(rmsdB: Float) {}
 
     override fun onBufferReceived(buffer: ByteArray?) {}
-
-    override fun onEndOfSpeech() {
+override fun onEndOfSpeech() {
         isListening = false
     }
 
@@ -632,14 +629,14 @@ class KuzmixVoiceService : Service(), RecognitionListener {
             if (consecutiveErrors >= 5) {
                 consecutiveErrors = 0
                 recreateSpeechRecognizerSafely()
-                return@post
+return@post
             }
 
             when (error) {
                 SpeechRecognizer.ERROR_RECOGNIZER_BUSY,
                 SpeechRecognizer.ERROR_CLIENT -> {
                     cancelAndRestartListening(400)
-                }
+}
                 SpeechRecognizer.ERROR_NO_MATCH,
                 SpeechRecognizer.ERROR_SPEECH_TIMEOUT -> {
                     scheduleRestartListening(250)
@@ -649,7 +646,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                 }
                 SpeechRecognizer.ERROR_AUDIO -> {
                     cancelAndRestartListening(600)
-                }
+}
                 SpeechRecognizer.ERROR_NETWORK,
                 SpeechRecognizer.ERROR_NETWORK_TIMEOUT,
                 SpeechRecognizer.ERROR_SERVER -> {
@@ -657,7 +654,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                 }
                 else -> {
                     cancelAndRestartListening(500)
-                }
+}
             }
         }
     }
@@ -677,7 +674,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
             if (isMediaActive && !hasWake && !isStopCmd && !isMediaCmd && !isManualTrigger) {
                 android.util.Log.d("KuzmixVoiceService", "Media session active - ignoring non-wake/non-media input: '$matchingSpoken'")
                 unduckAudio()
-                scheduleRestartListening(350)
+scheduleRestartListening(350)
                 return
             }
 
@@ -694,7 +691,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
 
             if (isManualTrigger || hasWake || isMediaCmd || hasDirect || isOverlayActive) {
                 duckAudio()
-                if (isSpeakingTts || intentEngine.isSpeaking) {
+if (isSpeakingTts || intentEngine.isSpeaking) {
                     intentEngine.stopSpeaking()
                     activeQueryJob?.cancel()
                     isSpeakingTts = false
@@ -703,13 +700,13 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                 handleVoiceQuery(matchingSpoken)
             } else {
                 unduckAudio()
-                if (::overlayManager.isInitialized) {
+if (::overlayManager.isInitialized) {
                     overlayManager.deactivateAura()
                 }
             }
         } else {
             unduckAudio()
-            isManualTrigger = false
+isManualTrigger = false
             if (::overlayManager.isInitialized) {
                 overlayManager.deactivateAura()
             }
@@ -733,7 +730,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
 
             // When media is playing, only react to wake words, media commands, or stop commands
             if (isMediaActive && !hasWake && !isStopCmd && !isMediaCmd && !isManualTrigger) {
-                return
+return
             }
 
             if (isStopCmd) {
@@ -742,7 +739,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
                 return
             }
             if (isManualTrigger || hasWake || isMediaCmd || isDirectCommand(partialText)) {
-                if (::overlayManager.isInitialized) {
+if (::overlayManager.isInitialized) {
                     overlayManager.activateAura(0)
                 }
             }
@@ -757,14 +754,14 @@ class KuzmixVoiceService : Service(), RecognitionListener {
         serviceScope.cancel()
         try {
             speechRecognizer?.setRecognitionListener(null)
-            speechRecognizer?.cancel()
+speechRecognizer?.cancel()
             speechRecognizer?.destroy()
         } catch (e: Exception) {}
         speechRecognizer = null
         if (::intentEngine.isInitialized) {
             intentEngine.shutdown()
         }
-        if (::overlayManager.isInitialized) {
+if (::overlayManager.isInitialized) {
             overlayManager.removeOverlay()
         }
         releaseWakeLock()
@@ -819,7 +816,7 @@ class KuzmixVoiceService : Service(), RecognitionListener {
             .setContentTitle("KC Voice Assistant Active")
             .setContentText("Listening for \"Hey Kuzmix\" system-wide.")
             .setSmallIcon(R.drawable.ic_kuzmix_notification)
-            .setPriority(NotificationCompat.PRIORITY_LOW)
+.setPriority(NotificationCompat.PRIORITY_LOW)
             .build()
     }
 

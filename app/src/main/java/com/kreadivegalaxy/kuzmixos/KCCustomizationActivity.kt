@@ -77,7 +77,7 @@ open class KCCustomizationActivity : ComponentActivity() {
             var showIconStyleScreen by remember { mutableStateOf(false) }
 
             // Device Local Gallery Picker
-            val galleryLauncher = rememberLauncherForActivityResult(
+val galleryLauncher = rememberLauncherForActivityResult(
                 contract = ActivityResultContracts.GetContent()
             ) { uri: Uri? ->
                 uri?.let { selectedUri ->
@@ -480,7 +480,7 @@ fun DeviceStudioBottomSheet(
                                 fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                                 color = if (isSelected) KCTokens.TextPureWhite else KCTokens.TextSoftGray
                             )
-                        }
+}
                     }
                 }
             }
@@ -526,7 +526,7 @@ fun DeviceStudioBottomSheet(
             }
 
             Spacer(modifier = Modifier.height(16.dp))
-        }
+}
     }
 }
 

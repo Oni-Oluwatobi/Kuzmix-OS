@@ -49,7 +49,7 @@ open class MainActivity : ComponentActivity() {
                 android.util.Log.d("KuzmixOS", "KuzmixVoiceService deferred: RECORD_AUDIO permission not yet granted.")
                 return
             }
-            val voiceServiceIntent = android.content.Intent(this, KuzmixVoiceService::class.java).apply {
+val voiceServiceIntent = android.content.Intent(this, KuzmixVoiceService::class.java).apply {
                 putExtra("EXTRA_START_LISTENING", true)
             }
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -58,13 +58,13 @@ open class MainActivity : ComponentActivity() {
                 startService(voiceServiceIntent)
             }
         } catch (unused: Throwable) {
-            android.util.Log.e("KuzmixOS", "Failed to start KuzmixVoiceService: ${unused.message}")
+android.util.Log.e("KuzmixOS", "Failed to start KuzmixVoiceService: ${unused.message}")
         }
     }
 
     override fun onResume() {
         super.onResume()
-    }
+}
 
     @Deprecated("Use Activity Result API instead")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -72,7 +72,7 @@ open class MainActivity : ComponentActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 2026) {
             android.util.Log.d("KuzmixOS", "Runtime permissions response received.")
-        }
+}
     }
 
     @Deprecated("Use Activity Result API instead")
@@ -80,7 +80,7 @@ open class MainActivity : ComponentActivity() {
         @Suppress("DEPRECATION")
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 2027) {
-            startKuzmixVoiceService()
+startKuzmixVoiceService()
         }
     }
 
@@ -110,7 +110,7 @@ open class MainActivity : ComponentActivity() {
             requestPermissions(permissionsList.toTypedArray(), 2026)
         } catch (e: Throwable) {
             android.util.Log.w("KuzmixOS", "Permission request non-fatal error: ${e.message}")
-        }
+}
         
         val hardwareTier = try {
             HardwareDetection.detectTier(this)
@@ -134,7 +134,7 @@ open class MainActivity : ComponentActivity() {
             android.util.Log.e("KuzmixOS", "Icon resolver init failed: ${e.message}")
         }
 
-        setContent {
+setContent {
             val context = LocalContext.current
 
             val sharedPrefs = remember {
@@ -162,7 +162,7 @@ open class MainActivity : ComponentActivity() {
             }
             var isUserLoggedIn by remember {
                 mutableStateOf(isInitiallyAuthenticated)
-            }
+}
             var themeMode by remember {
                 mutableStateOf(sharedPrefSettings?.getString("theme_mode", "system") ?: "system")
             }
@@ -171,7 +171,7 @@ open class MainActivity : ComponentActivity() {
                 // Consume back press at root level so the launcher OS never closes to desktop/black screen
             }
 
-            val systemDark = isSystemInDarkTheme()
+val systemDark = isSystemInDarkTheme()
             val darkTheme = when (themeMode) {
                 "light" -> false
                 "dark" -> true
@@ -186,7 +186,7 @@ open class MainActivity : ComponentActivity() {
                         context.startService(serviceIntent)
                     } catch (unused: Throwable) {
                         android.util.Log.e("KuzmixOS", "Failed to start KuzmixLauncherService: ${unused.message}")
-                    }
+}
                 }
             }
 
@@ -202,7 +202,7 @@ open class MainActivity : ComponentActivity() {
                         } catch (_: Throwable) {}
                         isUserLoggedIn = true
                         startKuzmixVoiceService()
-                    }
+}
                 } else {
                     HomeDashboard(
                         hardwareTier = hardwareTier,

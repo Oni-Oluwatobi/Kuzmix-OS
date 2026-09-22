@@ -39,7 +39,7 @@ val HexagonShape: Shape = GenericShape { size, _ ->
 fun getIconMaskShape(maskKey: String): Shape {
     return when (LauncherIconMask.fromKey(maskKey)) {
         LauncherIconMask.SQUIRCLE -> RoundedCornerShape(16.dp)
-        LauncherIconMask.CIRCLE -> CircleShape
+LauncherIconMask.CIRCLE -> CircleShape
         LauncherIconMask.TEARDROP -> RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp, bottomEnd = 24.dp, bottomStart = 6.dp)
         LauncherIconMask.ROUNDED_SQUARE -> RoundedCornerShape(10.dp)
         LauncherIconMask.HEXAGON -> HexagonShape

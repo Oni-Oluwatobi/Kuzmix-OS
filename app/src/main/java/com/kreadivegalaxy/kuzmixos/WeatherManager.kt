@@ -51,6 +51,6 @@ class WeatherManager(private val context: Context) {
             "${match.groupValues[1]}°${match.groupValues[2]}"
         } else {
             "N/A"
-        }
+}
     }
 }

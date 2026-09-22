@@ -77,7 +77,7 @@ fun rememberAeroGlassSensorState(context: Context = LocalContext.current): AeroG
             }
             if (magSensor != null) {
                 sensorManager.registerListener(sensorListener, magSensor, SensorManager.SENSOR_DELAY_NORMAL)
-            }
+}
 
             onDispose {
                 sensorManager.unregisterListener(sensorListener)

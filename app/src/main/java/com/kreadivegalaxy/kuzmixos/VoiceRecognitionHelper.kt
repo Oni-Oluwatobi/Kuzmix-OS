@@ -19,7 +19,7 @@ class VoiceRecognitionHelper(
 ) {
     private var speechRecognizer: SpeechRecognizer? = null
 
-    fun hasMicrophonePermission(): Boolean {
+fun hasMicrophonePermission(): Boolean {
         return ContextCompat.checkSelfPermission(
             context,
             Manifest.permission.RECORD_AUDIO
@@ -99,12 +99,12 @@ class VoiceRecognitionHelper(
         }
     }
 
-    fun destroy() {
+fun destroy() {
         try {
             speechRecognizer?.destroy()
             speechRecognizer = null
         } catch (e: Exception) {
             android.util.Log.w("VoiceRecognitionHelper", "Error destroying recognizer: ${e.message}")
-        }
+}
     }
 }
